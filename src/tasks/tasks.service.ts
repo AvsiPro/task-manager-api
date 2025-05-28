@@ -5,9 +5,13 @@ import { PrismaService } from '../prisma.service';
 export class TasksService {
   constructor(private prisma: PrismaService) {}
 
-  create(userId: number, title: string) {
+  create(userId: number, title: string, description: string) {
     return this.prisma.task.create({
-      data: { title, userId },
+      data: {
+        title,
+        description,
+        userId,
+      },
     });
   }
 
