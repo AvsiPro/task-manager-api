@@ -14,16 +14,17 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
+  id       Int    @id @default(autoincrement()) // <- GARANTA que aqui é Int
   email    String @unique
   password String
   tasks    Task[]
 }
 
 model Task {
-  id        String  @id @default(uuid())
+  id        Int      @id @default(autoincrement())
   title     String
-  completed Boolean @default(false)
-  userId    String
-  user      User    @relation(fields: [userId], references: [id])
+  done      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
 }
