@@ -34,4 +34,12 @@ export class TasksService {
       where: { id, userId },
     });
   }
+
+  // ✅ Método para verificar duplicidade
+  async exists(userId: number, title: string): Promise<boolean> {
+    const count = await this.prisma.task.count({
+      where: { userId, title },
+    });
+    return count > 0;
+  }
 }
